@@ -34,16 +34,14 @@ import com.pay.productsapp.features.products.presentation.ProductViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductInfoScreen(
-    productViewModel: ProductViewModel = viewModel(),
+    productViewModel: ProductViewModel,
     prodId: Int, navController: NavController
 ) {
     val product by productViewModel.product.observeAsState()
     val isLoading by productViewModel.isLoadingPInfo.observeAsState(false)
-
     LaunchedEffect(prodId) {
         productViewModel.fetchProductInfo(prodId)
     }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -57,7 +55,10 @@ fun ProductInfoScreen(
                     }
                 }
             )
-        }
+
+
+        },
+
     ) { padding ->
 
         if (isLoading) {
