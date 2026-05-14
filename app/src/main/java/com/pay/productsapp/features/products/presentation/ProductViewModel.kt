@@ -14,9 +14,15 @@ class ProductViewModel : ViewModel() {
     private val productRepository = ProductRepositoryImpl(apiClient)
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> = _products
+
+    private val _product = MutableLiveData<Product>()
+    val product: LiveData<Product> = _product
+
+
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
-
+    private val _isLoadingPInfo = MutableLiveData(false)
+    val isLoadingPInfo: LiveData<Boolean> = _isLoadingPInfo
     fun loadProducts() {
         viewModelScope.launch {
             try {
@@ -27,6 +33,20 @@ class ProductViewModel : ViewModel() {
                 // handle error
             }finally {
                 _isLoading.value = false
+            }
+        }
+    }
+
+    fun fetchProductInfo(pId: Int) {
+        viewModelScope.launch {
+            try {
+                _isLoadingPInfo.value = true
+                val result = productRepository.getProductInfo(pId)
+                _product.value = result
+            } catch (e: Exception) {
+                // handle error
+            }finally {
+                _isLoadingPInfo.value = false
             }
         }
     }

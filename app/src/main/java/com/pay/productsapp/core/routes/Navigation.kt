@@ -1,10 +1,7 @@
 package com.pay.productsapp.core.routes
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavArgs
-import androidx.navigation.NavArgument
 import androidx.navigation.NavType
-import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,7 +24,7 @@ fun Navigation() {
 
             })
         ) { entry ->
-            ProductInfoScreen(prodId = entry.arguments?.getInt("pId") ?: 0)
+            ProductInfoScreen(prodId = entry.arguments?.getInt("pId") ?: 0, navController = navController)
         }
 
     }
