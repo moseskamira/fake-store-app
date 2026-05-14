@@ -62,6 +62,7 @@ dependencies {
     // Gson
     implementation(libs.converter.gson)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.storage)
 //    kapt(libs.glide.compiler)
 
     // Testing
@@ -76,6 +77,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.coil.compose)
 }
 
 //dependencies {
