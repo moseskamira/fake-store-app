@@ -24,7 +24,9 @@ fun ProductItemCard(product: Product, onClick: (Int) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(12.dp).clickable {
+                product.id?.let { onClick(it) }
+            }
 
 
     ) {
