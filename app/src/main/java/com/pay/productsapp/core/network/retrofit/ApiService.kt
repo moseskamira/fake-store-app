@@ -9,7 +9,6 @@ class ApiService private constructor() {
             Retrofit.Builder().baseUrl("https://fakestoreapi.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
         val apiClient: ApiClient = appRetrofit.create(ApiClient::class.java)
-
     }
 
 

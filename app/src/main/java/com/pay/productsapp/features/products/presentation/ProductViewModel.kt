@@ -17,13 +17,19 @@ class ProductViewModel : ViewModel() {
 
     private val _product = MutableLiveData<Product>()
     val product: LiveData<Product> = _product
+    private val productCache = mutableMapOf<Int, Product>()
 
 
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
     private val _isLoadingPInfo = MutableLiveData(false)
     val isLoadingPInfo: LiveData<Boolean> = _isLoadingPInfo
-    fun loadProducts() {
+
+    init {
+        loadProducts()
+    }
+
+    private fun loadProducts() {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
@@ -31,21 +37,30 @@ class ProductViewModel : ViewModel() {
                 _products.value = result
             } catch (e: Exception) {
                 // handle error
-            }finally {
+            } finally {
                 _isLoading.value = false
             }
         }
     }
 
-    fun fetchProductInfo(pId: Int) {
+    fun fetchProductInfo(
+        pId: Int,
+        forceRefresh: Boolean = false
+    ) {
+        val cachedProduct = productCache[pId]
+        if (!forceRefresh && cachedProduct != null) {
+            _product.value = cachedProduct
+            return
+        }
         viewModelScope.launch {
             try {
                 _isLoadingPInfo.value = true
                 val result = productRepository.getProductInfo(pId)
+                productCache[pId] = result
                 _product.value = result
             } catch (e: Exception) {
-                // handle error
-            }finally {
+                e.printStackTrace()
+            } finally {
                 _isLoadingPInfo.value = false
             }
         }

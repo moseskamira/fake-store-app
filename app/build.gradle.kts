@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.storage)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.android)
 //    kapt(libs.glide.compiler)
 
     // Testing
