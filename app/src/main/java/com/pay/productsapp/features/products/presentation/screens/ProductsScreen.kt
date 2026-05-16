@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.pay.productsapp.core.navigation.AppScreen
-import com.pay.productsapp.features.products.presentation.ProductViewModel
+import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
 import com.pay.productsapp.features.products.presentation.components.ProductItemCard
 
 @OptIn(ExperimentalMaterial3Api::class)

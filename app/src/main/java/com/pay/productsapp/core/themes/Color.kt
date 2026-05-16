@@ -1,4 +1,4 @@
-package com.pay.productsapp.ui.theme
+package com.pay.productsapp.core.themes
 
 import androidx.compose.ui.graphics.Color
 

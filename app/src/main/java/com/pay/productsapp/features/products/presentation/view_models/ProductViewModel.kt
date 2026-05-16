@@ -1,4 +1,4 @@
-package com.pay.productsapp.features.products.presentation
+package com.pay.productsapp.features.products.presentation.view_models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

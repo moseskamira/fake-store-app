@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.pay.productsapp.core.navigation.Navigation
-import com.pay.productsapp.ui.theme.ProductsAppTheme
+import com.pay.productsapp.core.themes.ProductsAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
-import com.pay.productsapp.features.products.presentation.ProductViewModel
+import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
 import com.pay.productsapp.features.products.presentation.components.ProductInfoSection
 
 @OptIn(ExperimentalMaterial3Api::class)
