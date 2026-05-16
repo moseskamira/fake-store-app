@@ -12,34 +12,33 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiClient {
-
-    @GET(value = "products")
+    @GET(value = Apis.PRODUCTS)
     suspend fun fetchProducts(
         @Query("limit") limit: String,
         @Query("sort") sort: String
     ): List<ProductDTO>
 
-    @GET(value = "products/{id}")
+    @GET(value = Apis.PRODUCT_INFO)
     suspend fun fetchProduct(@Path("id") prodId: String): ProductDTO
 
-    @GET("products/categories")
+    @GET(Apis.CATEGORIES)
     suspend fun getCategories(): List<String>
 
-    @GET("products/category/{category}")
+    @GET(Apis.CATEGORY_PRODUCTS)
     suspend fun getProductsByCategory(
         @Path("category") category: String
     ): List<ProductDTO>
 
-    @GET("users")
+    @GET(Apis.USERS)
     suspend fun getUsers(): List<UserDTO>
 
-    @GET("carts")
+    @GET(Apis.CARTS)
     suspend fun getCarts(): List<CartDTO>
 
-    @GET("carts/{id}")
+    @GET(Apis.CART_INFO)
     suspend fun getSingleCart(@Path("id") cartId: String): CartDTO
 
-    @POST("auth/login")
+    @POST(Apis.LOGIN)
     suspend fun login(
         @Body request: LoginRequest
     ): LoginResponse
