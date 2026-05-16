@@ -1,4 +1,4 @@
-package com.pay.productsapp.core.routes
+package com.pay.productsapp.core.navigation
 
 sealed  class AppScreen(val route: String) {
     data object Products : AppScreen("products")

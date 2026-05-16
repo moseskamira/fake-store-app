@@ -5,19 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pay.productsapp.core.network.retrofit.ApiService
-import com.pay.productsapp.features.products.data.models.Product
+import com.pay.productsapp.features.products.data.models.ProductDTO
 import com.pay.productsapp.features.products.data.repositories.ProductRepositoryImpl
 import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel() {
     private val apiClient = ApiService.apiClient;
     private val productRepository = ProductRepositoryImpl(apiClient)
-    private val _products = MutableLiveData<List<Product>>()
-    val products: LiveData<List<Product>> = _products
+    private val _products = MutableLiveData<List<ProductDTO>>()
+    val products: LiveData<List<ProductDTO>> = _products
 
-    private val _product = MutableLiveData<Product>()
-    val product: LiveData<Product> = _product
-    private val productCache = mutableMapOf<Int, Product>()
+    private val _product = MutableLiveData<ProductDTO>()
+    val product: LiveData<ProductDTO> = _product
+    private val productCache = mutableMapOf<Int, ProductDTO>()
 
 
     private val _isLoading = MutableLiveData(false)

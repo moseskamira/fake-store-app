@@ -1,0 +1,3 @@
+package com.pay.productsapp.features.auth.data.models
+
+data class LoginResponse(val token: String)
