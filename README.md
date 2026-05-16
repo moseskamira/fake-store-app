@@ -82,7 +82,6 @@ Remote Data Source (GitHub API)
 - Coroutines + Flow
 - Material 3
 - Navigation Compose
-- Hilt (optional)
 
 ---
 

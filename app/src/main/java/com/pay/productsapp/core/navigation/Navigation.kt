@@ -1,4 +1,4 @@
-package com.pay.productsapp.core.routes
+package com.pay.productsapp.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
