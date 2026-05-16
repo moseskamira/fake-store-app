@@ -14,12 +14,10 @@ import com.pay.productsapp.features.products.data.models.Product
 @Composable
 fun ProductInfoSection(product: Product) {
     Column(modifier = Modifier.padding(16.dp)) {
-
         Text(
             text = "Description",
             style = MaterialTheme.typography.titleMedium
         )
-
         product.description?.let {
             Text(
                 text = it,
@@ -27,12 +25,10 @@ fun ProductInfoSection(product: Product) {
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
-
         Spacer(modifier = Modifier.height(16.dp))
-
         Text(
             text = "Price: $${product.price}",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleMedium
         )
     }
 }

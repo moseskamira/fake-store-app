@@ -5,27 +5,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.pay.productsapp.features.products.data.models.Product
 
 @Composable
-fun ProductHeaderSection(product: Product) {
+fun ProductHeaderSection(image: String, title : String) {
     Column {
         AsyncImage(
-            model = product.image,
-            contentDescription = product.title,
+            model = image,
+            contentDescription = title,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
         )
-        product.title?.let {
-            Text(
-                text = it,
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(16.dp)
-            )
-        }
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth()
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+            maxLines = 2
+
+
+        )
     }
 }

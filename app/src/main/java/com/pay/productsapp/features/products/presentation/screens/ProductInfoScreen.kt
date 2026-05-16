@@ -4,10 +4,11 @@ import ProductHeaderSection
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -21,6 +22,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.pay.productsapp.features.products.presentation.ProductViewModel
 import com.pay.productsapp.features.products.presentation.components.ProductInfoSection
@@ -39,15 +42,15 @@ fun ProductInfoScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Product Details") },
+                title = { Text("Product Details", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth()) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back"
                         )
                     }
-                }
+                },
             )
         },
     ) { padding ->
@@ -56,7 +59,7 @@ fun ProductInfoScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(color = Color.Gray, modifier = Modifier.align(alignment = Alignment.Center))
             }
         } else {
             product?.let { p ->
@@ -65,7 +68,7 @@ fun ProductInfoScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Top
                 ) {
-                    item { ProductHeaderSection(p) }
+                    item { p.image?.let { p.title?.let { it1 -> ProductHeaderSection(it, it1) } } }
                     item { ProductInfoSection(p) }
                 }
             } ?: Box(
