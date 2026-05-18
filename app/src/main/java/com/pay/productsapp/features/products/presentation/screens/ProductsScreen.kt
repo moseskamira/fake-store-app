@@ -22,39 +22,27 @@ fun ProductScreen(
     productViewModel: ProductViewModel,
     navController: NavController
 ) {
-
     val products by productViewModel.products.observeAsState(emptyList())
-
     val isLoading by productViewModel.isLoading.observeAsState(false)
-
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-
         if (isLoading) {
-
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
             )
-
         } else {
-
             LazyColumn {
-
                 item {
-
                     Text(
                         text = "Products",
                         style = MaterialTheme.typography.headlineMedium
                     )
                 }
-
                 items(products) { product ->
-
                     ProductItemCard(
                         product = product,
                         onClick = { prodId ->
-
                             navController.navigate(
                                 "${AppScreen.ProductDetails.route}/$prodId"
                             )

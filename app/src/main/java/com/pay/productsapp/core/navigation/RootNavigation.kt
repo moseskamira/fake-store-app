@@ -17,7 +17,7 @@ import com.pay.productsapp.features.products.presentation.screens.ProductInfoScr
 import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
 
 @Composable
-fun Navigation() {
+fun RootNavigation() {
     val navController = rememberNavController()
     val productViewModel: ProductViewModel = viewModel()
     val authViewModel: AuthViewModel = viewModel()
@@ -31,7 +31,6 @@ fun Navigation() {
     ) {
         composable(route = AppScreen.Login.route) {
             LoginScreen(navController = navController, authViewModel = authViewModel)
-
         }
         composable(AppScreen.AppShell.route) {
             AppShellScreen(
