@@ -110,6 +110,12 @@ MVVM + Compose:
 
 ---
 
+## 🚀 Login Creds
+
+- username: mor_2314 | password: 83r5^_
+
+---
+
 ## 📌 Summary
 
 This project demonstrates modern Android development using MVVM architecture and Jetpack Compose, focusing on scalability, clean architecture, and reactive UI design.
