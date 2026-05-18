@@ -5,6 +5,7 @@ import com.pay.productsapp.features.auth.data.models.LoginResponse
 import com.pay.productsapp.features.carts.data.models.CartDTO
 import com.pay.productsapp.features.products.data.models.ProductDTO
 import com.pay.productsapp.features.users.data.models.UserDTO
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,13 +16,16 @@ interface ApiClient {
     @POST(Apis.LOGIN)
     suspend fun login(
         @Body request: LoginRequest
-    ): LoginResponse
+    ): Response<LoginResponse>
 
     @GET(value = Apis.PRODUCTS)
     suspend fun fetchProducts(
         @Query("limit") limit: String,
         @Query("sort") sort: String
     ): List<ProductDTO>
+
+    @GET(Apis.USERS)
+    suspend fun getUsers(): Response<List<UserDTO>>
 
     @GET(value = Apis.PRODUCT_INFO)
     suspend fun fetchProduct(@Path("id") prodId: String): ProductDTO
@@ -34,8 +38,6 @@ interface ApiClient {
         @Path("category") category: String
     ): List<ProductDTO>
 
-    @GET(Apis.USERS)
-    suspend fun getUsers(): List<UserDTO>
 
     @GET(Apis.CARTS)
     suspend fun getCarts(): List<CartDTO>

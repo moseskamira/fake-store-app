@@ -14,6 +14,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -36,11 +39,16 @@ import com.pay.productsapp.features.auth.data.models.LoginRequest
 import com.pay.productsapp.features.auth.presentation.view_models.AuthViewModel
 
 @Composable
-fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
+fun LoginScreen(
+    navController: NavController,
+    authViewModel: AuthViewModel,
+) {
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val loginResponse by authViewModel.loginResponse.observeAsState()
     val isLoading by authViewModel.isLoading.observeAsState(false)
+    val errorMessage by authViewModel.error.observeAsState("")
+    val snackBarHostState = remember { SnackbarHostState() }
     LaunchedEffect(loginResponse?.token) {
         val token = loginResponse?.token
         if (!token.isNullOrEmpty()) {
@@ -49,9 +57,20 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
             }
         }
     }
-    Surface(
+
+    LaunchedEffect(errorMessage) {
+        val message = errorMessage
+        if (!message.isNullOrBlank()) {
+            snackBarHostState.showSnackbar(
+                message = message
+            )
+        }
+    }
+
+    Scaffold(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
     ) {
         Column(
             modifier = Modifier
@@ -126,7 +145,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
                     // Navigate to register
                 }
             ) {
-                Text(text = "Don't have an account? Register")
+                Text(text = "Test User: username: mor_2314 | password: 83r5^_", fontSize = 14.sp)
             }
         }
     }
