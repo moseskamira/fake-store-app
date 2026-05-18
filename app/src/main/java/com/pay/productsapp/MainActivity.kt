@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.pay.productsapp.core.navigation.Navigation
+import com.pay.productsapp.core.navigation.RootNavigation
 import com.pay.productsapp.core.themes.ProductsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ProductsAppTheme {
-                Navigation()
+                RootNavigation()
             }
         }
     }
