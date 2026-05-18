@@ -44,7 +44,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
     LaunchedEffect(loginResponse?.token) {
         val token = loginResponse?.token
         if (!token.isNullOrEmpty()) {
-            navController.navigate(AppScreen.Products.route) {
+            navController.navigate(AppScreen.AppShell.route) {
                 popUpTo(AppScreen.Login.route) { inclusive = true }
             }
         }

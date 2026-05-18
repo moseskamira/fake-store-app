@@ -10,11 +10,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.pay.productsapp.core.network.retrofit.AuthState
+import com.pay.productsapp.features.auth.presentation.screens.AppShellScreen
 import com.pay.productsapp.features.auth.presentation.screens.LoginScreen
 import com.pay.productsapp.features.auth.presentation.view_models.AuthViewModel
-import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
 import com.pay.productsapp.features.products.presentation.screens.ProductInfoScreen
-import com.pay.productsapp.features.products.presentation.screens.ProductScreen
+import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
 
 @Composable
 fun Navigation() {
@@ -26,17 +26,17 @@ fun Navigation() {
     NavHost(
         navController = navController,
         startDestination = if (isLoggedIn) {
-            AppScreen.Products.route
+            AppScreen.AppShell.route
         } else AppScreen.Login.route
     ) {
         composable(route = AppScreen.Login.route) {
             LoginScreen(navController = navController, authViewModel = authViewModel)
 
         }
-        composable(route = AppScreen.Products.route) {
-            ProductScreen(
+        composable(AppScreen.AppShell.route) {
+            AppShellScreen(
                 productViewModel = productViewModel,
-                navController = navController
+                rootNavController = navController
             )
         }
         composable(
