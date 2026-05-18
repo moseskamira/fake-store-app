@@ -12,6 +12,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiClient {
+    @POST(Apis.LOGIN)
+    suspend fun login(
+        @Body request: LoginRequest
+    ): LoginResponse
+
     @GET(value = Apis.PRODUCTS)
     suspend fun fetchProducts(
         @Query("limit") limit: String,
@@ -38,8 +43,5 @@ interface ApiClient {
     @GET(Apis.CART_INFO)
     suspend fun getSingleCart(@Path("id") cartId: String): CartDTO
 
-    @POST(Apis.LOGIN)
-    suspend fun login(
-        @Body request: LoginRequest
-    ): LoginResponse
+
 }

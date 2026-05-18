@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.firebase.database.ktx)
 //    kapt(libs.glide.compiler)
 
     // Testing
