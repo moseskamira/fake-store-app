@@ -15,11 +15,13 @@ import com.pay.productsapp.features.auth.presentation.screens.LoginScreen
 import com.pay.productsapp.features.auth.presentation.view_models.AuthViewModel
 import com.pay.productsapp.features.products.presentation.screens.ProductInfoScreen
 import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
+import com.pay.productsapp.features.users.presentation.view_models.UserViewModel
 
 @Composable
 fun RootNavigation() {
     val navController = rememberNavController()
     val productViewModel: ProductViewModel = viewModel()
+    val userViewModel: UserViewModel = viewModel()
     val authViewModel: AuthViewModel = viewModel()
     val token by AuthState.token.collectAsState()
     val isLoggedIn = !token.isNullOrEmpty()
@@ -35,7 +37,8 @@ fun RootNavigation() {
         composable(AppScreen.AppShell.route) {
             AppShellScreen(
                 productViewModel = productViewModel,
-                rootNavController = navController
+                rootNavController = navController,
+                userViewModel = userViewModel
             )
         }
         composable(

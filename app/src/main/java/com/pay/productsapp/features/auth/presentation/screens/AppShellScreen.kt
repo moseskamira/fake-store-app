@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
@@ -16,45 +17,54 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.pay.productsapp.core.navigation.AppScreen
 import com.pay.productsapp.core.navigation.AppShellNavigation
-import com.pay.productsapp.core.navigation.BottomNavScreen
+import com.pay.productsapp.core.navigation.AppShellNavScreen
 import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
+import com.pay.productsapp.features.users.presentation.view_models.UserViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppShellScreen(
     productViewModel: ProductViewModel,
-    rootNavController: NavController
+    rootNavController: NavController,
+    userViewModel: UserViewModel
 ) {
     val navController = rememberNavController()
     val items = listOf(
-        BottomNavScreen.Home,
-        BottomNavScreen.Products,
-        BottomNavScreen.Profile
+        AppShellNavScreen.Home,
+        AppShellNavScreen.Products,
+        AppShellNavScreen.Profile
     )
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val currentTitle = items.find { it.route == currentRoute }?.title ?: "App"
+    val snackBarHostState = remember { SnackbarHostState() }
 
-    Scaffold(modifier = Modifier.fillMaxWidth(),
+    Scaffold(containerColor = Color.White, modifier = Modifier.fillMaxWidth(),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = currentTitle)
+                    Text(text = currentTitle, fontSize = 16.sp)
                 }
             )
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHostState)
         },
 
         bottomBar = {
@@ -89,33 +99,18 @@ fun AppShellScreen(
             }
         }
 
-    ) {
+    ) { paddingValues ->
         AppShellNavigation(
             rootNavController = rootNavController,
             productViewModel = productViewModel,
-            navController = navController
+            navController = navController,
+            userViewModel = userViewModel,
+            modifier = Modifier.padding(paddingValues),
+            snackBarHostState = snackBarHostState
         )
     }
 }
 
-@Composable
-fun HomeScreen() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Text(
-            text = "Home Screen",
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        Text(
-            text = "Welcome to Products App"
-        )
-    }
-}
 
 @Composable
 fun ProfileScreen(rootNavController: NavController) {
