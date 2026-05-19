@@ -18,17 +18,17 @@ interface ApiClient {
         @Body request: LoginRequest
     ): Response<LoginResponse>
 
+    @GET(Apis.USERS)
+    suspend fun getUsers(): Response<List<UserDTO>>
+
     @GET(value = Apis.PRODUCTS)
     suspend fun fetchProducts(
         @Query("limit") limit: String,
         @Query("sort") sort: String
-    ): List<ProductDTO>
-
-    @GET(Apis.USERS)
-    suspend fun getUsers(): Response<List<UserDTO>>
+    ): Response<List<ProductDTO>>
 
     @GET(value = Apis.PRODUCT_INFO)
-    suspend fun fetchProduct(@Path("id") prodId: String): ProductDTO
+    suspend fun fetchProduct(@Path("id") prodId: String): Response<ProductDTO>
 
     @GET(Apis.CATEGORIES)
     suspend fun getCategories(): List<String>
