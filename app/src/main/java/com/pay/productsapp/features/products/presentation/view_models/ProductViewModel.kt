@@ -22,6 +22,10 @@ class ProductViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
+    private val _error = MutableLiveData("")
+    val error: LiveData<String> = _error
+    private val _pInfoError = MutableLiveData("")
+    val pInfoError: LiveData<String> = _pInfoError
     private val _isLoadingPInfo = MutableLiveData(false)
     val isLoadingPInfo: LiveData<Boolean> = _isLoadingPInfo
 
@@ -31,15 +35,17 @@ class ProductViewModel : ViewModel() {
 
     private fun loadProducts() {
         viewModelScope.launch {
-            try {
-                _isLoading.value = true
-                val result = productRepository.getProducts()
-                _products.value = result
-            } catch (e: Exception) {
-                // handle error
-            } finally {
-                _isLoading.value = false
+            _isLoading.value = true
+            _error.value = null
+            val result = productRepository.getProducts()
+            if (result.success) {
+                val data = result.data
+                _products.value = data
+            } else {
+                val errorMsg = result.error
+                _error.value = errorMsg
             }
+            _isLoading.value = false
         }
     }
 
@@ -53,16 +59,22 @@ class ProductViewModel : ViewModel() {
             return
         }
         viewModelScope.launch {
-            try {
-                _isLoadingPInfo.value = true
-                val result = productRepository.getProductInfo(pId)
-                productCache[pId] = result
-                _product.value = result
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                _isLoadingPInfo.value = false
+            _isLoadingPInfo.value = true
+            _pInfoError.value = null
+            val result = productRepository.getProductInfo(pId)
+            if (result.success) {
+                result.data?.let { data ->
+                    productCache[pId] = data
+                    _product.value = data
+                }
+            } else {
+                val error = result.error
+                _pInfoError.value = error
             }
+
+            _isLoadingPInfo.value = false
+
+
         }
     }
 
