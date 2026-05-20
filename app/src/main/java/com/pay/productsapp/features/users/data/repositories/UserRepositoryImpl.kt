@@ -1,12 +1,12 @@
 package com.pay.productsapp.features.users.data.repositories
 
 import com.pay.productsapp.core.network.responses.NetworkResponse
-import com.pay.productsapp.core.network.retrofit.ApiService
+import com.pay.productsapp.core.network.retrofit.ApiClient
 import com.pay.productsapp.features.users.data.models.UserDTO
 import com.pay.productsapp.features.users.domain.repositories.UserRepository
 
-class UserRepositoryImpl : UserRepository {
-    private val apiClient = ApiService.apiClient
+class UserRepositoryImpl(private val apiClient: ApiClient) : UserRepository {
+
     override suspend fun getUsers(): NetworkResponse<List<UserDTO>> {
         try {
             val response = apiClient.getUsers()

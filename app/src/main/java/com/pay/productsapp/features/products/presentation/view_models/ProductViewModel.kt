@@ -4,22 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pay.productsapp.core.network.retrofit.ApiService
 import com.pay.productsapp.features.products.data.models.ProductDTO
-import com.pay.productsapp.features.products.data.repositories.ProductRepositoryImpl
+import com.pay.productsapp.features.products.domain.repositories.ProductRepository
 import kotlinx.coroutines.launch
 
-class ProductViewModel : ViewModel() {
-    private val apiClient = ApiService.apiClient;
-    private val productRepository = ProductRepositoryImpl(apiClient)
+class ProductViewModel(private val prodRepo: ProductRepository) : ViewModel() {
     private val _products = MutableLiveData<List<ProductDTO>>()
     val products: LiveData<List<ProductDTO>> = _products
-
     private val _product = MutableLiveData<ProductDTO>()
     val product: LiveData<ProductDTO> = _product
     private val productCache = mutableMapOf<Int, ProductDTO>()
-
-
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
     private val _error = MutableLiveData("")
@@ -37,7 +31,7 @@ class ProductViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
-            val result = productRepository.getProducts()
+            val result = prodRepo.getProducts()
             if (result.success) {
                 val data = result.data
                 _products.value = data
@@ -61,7 +55,7 @@ class ProductViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoadingPInfo.value = true
             _pInfoError.value = null
-            val result = productRepository.getProductInfo(pId)
+            val result = prodRepo.getProductInfo(pId)
             if (result.success) {
                 result.data?.let { data ->
                     productCache[pId] = data

@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -33,6 +34,7 @@ import androidx.navigation.compose.rememberNavController
 import com.pay.productsapp.core.navigation.AppScreen
 import com.pay.productsapp.core.navigation.AppShellNavigation
 import com.pay.productsapp.core.navigation.AppShellNavScreen
+import com.pay.productsapp.core.utils.SessionManager
 import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
 import com.pay.productsapp.features.users.presentation.view_models.UserViewModel
 
@@ -112,31 +114,4 @@ fun AppShellScreen(
 }
 
 
-@Composable
-fun ProfileScreen(rootNavController: NavController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
 
-        Text(
-            text = "Profile Screen",
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        Text(
-            text = "User Profile Information"
-        )
-
-        Button(
-            onClick = {
-                rootNavController.navigate(AppScreen.Login)
-
-            }
-        ) {
-
-            Text(text = "Logout")
-        }
-    }
-}
