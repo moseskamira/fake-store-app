@@ -2,10 +2,10 @@ package com.pay.productsapp.features.users.presentation.components
 
 import UserItem
 import androidx.compose.runtime.Composable
-import com.pay.productsapp.features.users.data.models.UserDTO
+import com.pay.productsapp.features.users.domain.models.User
 
 @Composable
-fun UserList(users: List<UserDTO>) {
+fun UserList(users: List<User>) {
     androidx.compose.foundation.lazy.LazyColumn {
         items(users.size) { index ->
             val user = users[index]

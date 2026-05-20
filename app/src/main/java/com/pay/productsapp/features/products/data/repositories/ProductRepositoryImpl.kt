@@ -6,7 +6,6 @@ import com.pay.productsapp.features.products.data.models.ProductDTO
 import com.pay.productsapp.features.products.domain.repositories.ProductRepository
 
 class ProductRepositoryImpl(private val apiClient: ApiClient) : ProductRepository {
-
     override suspend fun getProducts(): NetworkResponse<List<ProductDTO>> {
         try {
             val response = apiClient.fetchProducts(limit = "25", sort = "desc")

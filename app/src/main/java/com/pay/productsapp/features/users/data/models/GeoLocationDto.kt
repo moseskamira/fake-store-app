@@ -1,6 +1,6 @@
 package com.pay.productsapp.features.users.data.models
 
-data class Geolocation(
+data class GeoLocationDto(
     val lat: String,
     val long: String,
 )
