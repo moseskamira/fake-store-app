@@ -3,28 +3,45 @@ package com.pay.productsapp.core.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.pay.productsapp.core.network.retrofit.AuthState
+import com.pay.productsapp.core.network.retrofit.ApiService
+import com.pay.productsapp.core.utils.SessionManager
+import com.pay.productsapp.features.auth.data.repositories.AuthRepositoryImpl
 import com.pay.productsapp.features.auth.presentation.screens.AppShellScreen
 import com.pay.productsapp.features.auth.presentation.screens.LoginScreen
 import com.pay.productsapp.features.auth.presentation.view_models.AuthViewModel
+import com.pay.productsapp.features.auth.presentation.view_models.AuthViewModelFactory
+import com.pay.productsapp.features.products.data.repositories.ProductRepositoryImpl
 import com.pay.productsapp.features.products.presentation.screens.ProductInfoScreen
 import com.pay.productsapp.features.products.presentation.view_models.ProductViewModel
+import com.pay.productsapp.features.products.presentation.view_models.ProductViewModelFactory
+import com.pay.productsapp.features.users.data.repositories.UserRepositoryImpl
 import com.pay.productsapp.features.users.presentation.view_models.UserViewModel
+import com.pay.productsapp.features.users.presentation.view_models.UserViewModelFactory
 
 @Composable
 fun RootNavigation() {
     val navController = rememberNavController()
-    val productViewModel: ProductViewModel = viewModel()
-    val userViewModel: UserViewModel = viewModel()
-    val authViewModel: AuthViewModel = viewModel()
-    val token by AuthState.token.collectAsState()
-    val isLoggedIn = !token.isNullOrEmpty()
+    val context = LocalContext.current
+    val apiClient = ApiService.getInstance(context).apiClient
+    val authRepo = AuthRepositoryImpl(apiClient = apiClient)
+    val userRepo = UserRepositoryImpl(apiClient = apiClient)
+    val prodRepo = ProductRepositoryImpl(apiClient = apiClient)
+    val sessionManager  = SessionManager(context)
+    val isLoggedIn by sessionManager.isLoggedIn().collectAsState(false)
+    val authFactory =
+        AuthViewModelFactory(authRepository = authRepo, sesionManager = sessionManager)
+    val userFactory = UserViewModelFactory(userRepo)
+    val prodFactory = ProductViewModelFactory(prodRepo)
+    val authViewModel: AuthViewModel = viewModel(factory = authFactory)
+    val userViewModel: UserViewModel = viewModel(factory = userFactory)
+    val productViewModel: ProductViewModel = viewModel(factory = prodFactory)
     NavHost(
         navController = navController,
         startDestination = if (isLoggedIn) {
