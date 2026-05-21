@@ -9,16 +9,13 @@ data class UserEntity(
     val id: Long,
     val email: String,
     val username: String,
-    val password: String,
     val phone: String,
-
-    // flatten name
-    val firstName: String,
-    val lastName: String,
-
-    // flatten address
     val city: String,
     val street: String,
     val number: Long,
-    val zipcode: String
+    val zipcode: String,
+    val firstname: String,
+    val lastname: String,
+    val lat: String,
+    val long: String,
 )

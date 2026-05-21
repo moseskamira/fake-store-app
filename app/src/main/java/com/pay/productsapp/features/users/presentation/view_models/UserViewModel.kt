@@ -1,15 +1,16 @@
 package com.pay.productsapp.features.users.presentation.view_models
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.pay.productsapp.features.users.domain.models.User
 import com.pay.productsapp.features.users.domain.repositories.UserRepository
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
-class UserViewModel(private  val userRepo: UserRepository): ViewModel() {
+class UserViewModel(private val userRepo: UserRepository) : ViewModel() {
     private var _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
     private val _error = MutableLiveData<String?>()
@@ -18,19 +19,22 @@ class UserViewModel(private  val userRepo: UserRepository): ViewModel() {
     val users: LiveData<List<User>> = _users
 
 
-    @SuppressLint("SuspiciousIndentation")
-    fun getUsers(){
-        if(_users.value.isNullOrEmpty())
+    fun getUsers() {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
-            val response = userRepo.getUsers()
-            if(response.success){
-               val  responseData = response.data
-                _users.value = responseData
-            }else{
-                val errorMessage = response.error
-                _error.value = errorMessage;
+            val localUsers = userRepo.getDBUsers().asFlow().firstOrNull()
+            if (!localUsers.isNullOrEmpty()) {
+                _users.value = localUsers
+            } else {
+                val response = userRepo.getUsers()
+                if (response.success) {
+                    val responseData = response.data
+                    _users.value = responseData
+                } else {
+                    val errorMessage = response.error
+                    _error.value = errorMessage;
+                }
             }
             _isLoading.value = false
         }
