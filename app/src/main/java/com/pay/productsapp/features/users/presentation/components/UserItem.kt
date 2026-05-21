@@ -11,10 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
-import com.pay.productsapp.features.users.data.models.UserDTO
+import com.pay.productsapp.features.users.domain.models.User
 
 @Composable
-fun UserItem(user: UserDTO) {
+fun UserItem(user: User) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -32,14 +32,14 @@ fun UserItem(user: UserDTO) {
         Column(modifier = Modifier.padding(16.dp)) {
 
             Text(
-                text = "${user.name.firstname} ${user.name.lastname}",
+                text = "${user.firstname} ${user.lastname}",
                 style = MaterialTheme.typography.titleMedium
             )
 
             Text(text = "Username: ${user.username}")
             Text(text = "Email: ${user.email}")
             Text(text = "Phone: ${user.phone}")
-            Text(text = "City: ${user.address.city}")
+            Text(text = "City: ${user.city}")
         }
     }
 }

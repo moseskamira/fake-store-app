@@ -4,7 +4,7 @@ import com.pay.productsapp.features.auth.data.models.LoginRequest
 import com.pay.productsapp.features.auth.data.models.LoginResponse
 import com.pay.productsapp.features.carts.data.models.CartDTO
 import com.pay.productsapp.features.products.data.models.ProductDTO
-import com.pay.productsapp.features.users.data.models.UserDTO
+import com.pay.productsapp.features.users.data.models.UserDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,7 +19,7 @@ interface ApiClient {
     ): Response<LoginResponse>
 
     @GET(Apis.USERS)
-    suspend fun getUsers(): Response<List<UserDTO>>
+    suspend fun getUsers(): Response<List<UserDto>>
 
     @GET(value = Apis.PRODUCTS)
     suspend fun fetchProducts(

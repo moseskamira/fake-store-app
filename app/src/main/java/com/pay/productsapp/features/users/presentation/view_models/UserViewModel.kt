@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pay.productsapp.features.users.data.models.UserDTO
-import com.pay.productsapp.features.users.data.repositories.UserRepositoryImpl
+import com.pay.productsapp.features.users.domain.models.User
 import com.pay.productsapp.features.users.domain.repositories.UserRepository
 import kotlinx.coroutines.launch
 
@@ -15,8 +14,8 @@ class UserViewModel(private  val userRepo: UserRepository): ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
-    private val _users = MutableLiveData<List<UserDTO>>()
-    val users: LiveData<List<UserDTO>> = _users
+    private val _users = MutableLiveData<List<User>>()
+    val users: LiveData<List<User>> = _users
 
 
     @SuppressLint("SuspiciousIndentation")
