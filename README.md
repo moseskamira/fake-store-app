@@ -1,121 +1,203 @@
+# 🚀 Android LevelUp Project (MVVM + Jetpack Compose + Room DB)
 
-# 🚀 Android LevelUp Project (MVVM + Jetpack Compose)
-
-A modern Android application built with Jetpack Compose and MVVM architecture that displays products from the FakeStore Api.
+A modern Android application built using Jetpack Compose, MVVM Architecture, Retrofit, and Room Database, powered by the FakeStore API.
 
 ---
 
-## 📱 Overview
+# 📱 Overview
 
-Android LevelUp Project is a native Android app built using modern Android development practices.
+Android LevelUp Project is a production-style Android application demonstrating modern Android development practices using Clean Architecture principles and reactive UI patterns.
 
-It demonstrates:
-- MVVM architecture
+The project showcases:
+- MVVM Architecture
 - Jetpack Compose UI
-- Clean separation of concerns
-- API integration with Retrofit
+- Room Database Offline Storage
+- Retrofit API Integration
+- Repository Pattern
+- DTO → Domain Mapping
+- Local & Remote Data Sources
+- Coroutines + Flow
+- State Management
 
-The app allows one to:
-- Browse products
-- View product details
+The application integrates multiple FakeStore API features including:
+- Products
+- Users
+- Categories
+- Authentication
+- Cart functionality
 
 ---
 
-## ✨ Features
+# ✨ Features
 
+## 🛍 Products
 - Fetch products from API
-- Display products using LazyColumn / LazyVerticalGrid
+- Display products in LazyColumn / LazyVerticalGrid
 - Product detail screen
-- MVVM architecture
+- Category filtering
+
+## 👤 Users
+- Fetch users from API
+- Store users locally using Room Database
+- Offline-first data handling
+
+## 🔐 Authentication
+- User login integration
+- Session persistence
+
+## 🛒 Cart
+- Fetch cart data
+- Display cart items
+
+## 💾 Offline Support
+- Room Database caching
+- Local-first architecture approach
+- Persistent local storage
 
 ---
 
-## 🧠 Architecture (MVVM)
+# 🧠 Architecture (MVVM)
 
-### 📦 Layers
+## 📦 Layers
 
 ### 1. Presentation Layer (UI)
 Built using Jetpack Compose:
 - Composable Screens
 - ViewModels
-- UI State (StateFlow)
+- UI State Management
+- Navigation Compose
 
 ---
 
 ### 2. Domain Layer
 Contains business logic:
-- UseCases (optional)
-- Repository Interfaces
 - Domain Models
+- Repository Interfaces
+- Use Cases (optional)
 
 ---
 
 ### 3. Data Layer
-Handles data sources:
-- Retrofit API Service
+Handles all data operations:
+- Retrofit API Services
+- Room Database
 - DTO Models
-- Repository Implementation
-- Mappers (DTO → Domain)
+- Entity Models
+- Repository Implementations
+- Mappers (DTO ↔ Domain ↔ Entity)
 
 ---
 
-## 🔄 MVVM Flow
+# 🔄 Application Flow
 
-UI (Composable)
+UI (Compose)
 ↓
-ViewModel (StateFlow)
-↓
-UseCase (optional)
+ViewModel
 ↓
 Repository
 ↓
-Remote Data Source (GitHub API)
+Local Database (Room) / Remote API (Retrofit)
+
+The app intelligently decides whether to use cached local data or fetch fresh remote data.
 
 ---
 
-## 🧩 Tech Stack
+# 🗄 Room Database
+
+The project uses Room Database for:
+- Offline caching
+- Persistent local storage
+- Faster app performance
+- Reduced unnecessary network requests
+
+Implemented using:
+- Entities
+- DAO Interfaces
+- Room Database
+- TypeConverters
+- LiveData / Flow support
+
+---
+
+# 🌐 Networking
+
+API communication handled using:
+- Retrofit
+- OkHttp
+- Gson Converter
+
+Features include:
+- REST API Calls
+- JSON Serialization
+- Logging Interceptors
+- Error Handling
+
+---
+
+# 🧩 Tech Stack
 
 - Kotlin
 - Jetpack Compose
 - MVVM Architecture
-- Retrofit + OkHttp
-- Coroutines + Flow
+- Room Database
+- Retrofit
+- OkHttp
+- Coroutines
+- Flow
+- LiveData
 - Material 3
 - Navigation Compose
+- Coil Image Loading
+- KSP (Room Compiler)
 
 ---
 
-## 📡 API Used
+# 📡 API Used
 
-Products API:
+FakeStore API:
 
 https://fakestoreapi.com/
 
----
-
-MVVM + Compose:
-- Composable Screens
-- ViewModel handles state
-- LazyColumn / LazyGrid
-- Declarative UI
-- Reactive StateFlow updates
+Endpoints used include:
+- Products
+- Users
+- Categories
+- Carts
+- Authentication
 
 ---
 
-## 🚀 Future Improvements
+# 📂 Project Highlights
 
-- Fetch products
-- View product details
-- Handle navigation in Jetpack Compose
-
----
-
-## 🚀 Login Creds
-
-- username: mor_2314 | password: 83r5^_
+- Clean Architecture structure
+- DTO → Domain → Entity mapping
+- Repository Pattern
+- Offline-first architecture
+- Reactive UI updates
+- Scalable codebase structure
+- Production-ready Android practices
 
 ---
 
-## 📌 Summary
+# 🚀 Future Improvements
 
-This project demonstrates modern Android development using MVVM architecture and Jetpack Compose, focusing on scalability, clean architecture, and reactive UI design.
+- Pagination
+- Search functionality
+- Dependency Injection (Hilt)
+- Unit Testing
+- Dark Mode
+- Favorites/Wishlist
+- Enhanced caching strategy
+
+---
+
+# 🔐 Login Credentials
+
+- Username: mor_2314
+- Password: 83r5^_
+
+---
+
+# 📌 Summary
+
+This project demonstrates modern Android development using Jetpack Compose, MVVM Architecture, Retrofit, and Room Database while applying clean architecture principles, scalable project structure, reactive state management, and offline-first data handling strategies.
