@@ -31,7 +31,7 @@ fun RootNavigation() {
     val context = LocalContext.current
     val apiClient = ApiService.getInstance(context).apiClient
     val authRepo = AuthRepositoryImpl(apiClient = apiClient)
-    val userRepo = UserRepositoryImpl(apiClient = apiClient)
+    val userRepo = UserRepositoryImpl(apiClient = apiClient, context = context)
     val prodRepo = ProductRepositoryImpl(apiClient = apiClient)
     val sessionManager  = SessionManager(context)
     val isLoggedIn by sessionManager.isLoggedIn().collectAsState(false)
