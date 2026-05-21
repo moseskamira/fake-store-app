@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.pay.productsapp.features.users.data.data_source.local.entity.UserEntity
+import com.pay.productsapp.features.users.data.data_source.local.entities.UserEntity
 
 
 @Dao

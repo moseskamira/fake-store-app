@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.pay.productsapp.core.database.AppDatabase
 import com.pay.productsapp.core.network.retrofit.ApiService
 import com.pay.productsapp.core.utils.SessionManager
 import com.pay.productsapp.features.auth.data.repositories.AuthRepositoryImpl
@@ -30,9 +31,10 @@ fun RootNavigation() {
     val navController = rememberNavController()
     val context = LocalContext.current
     val apiClient = ApiService.getInstance(context).apiClient
+    val prodDao = AppDatabase.getDatabase(context).productDao()
     val authRepo = AuthRepositoryImpl(apiClient = apiClient)
     val userRepo = UserRepositoryImpl(apiClient = apiClient, context = context)
-    val prodRepo = ProductRepositoryImpl(apiClient = apiClient)
+    val prodRepo = ProductRepositoryImpl(apiClient = apiClient, prodDao = prodDao)
     val sessionManager  = SessionManager(context)
     val isLoggedIn by sessionManager.isLoggedIn().collectAsState(false)
     val authFactory =

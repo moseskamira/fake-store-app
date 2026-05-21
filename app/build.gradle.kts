@@ -78,6 +78,7 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.common.jvm)
     ksp(libs.androidx.room.compiler)
 
     // Firebase / Google

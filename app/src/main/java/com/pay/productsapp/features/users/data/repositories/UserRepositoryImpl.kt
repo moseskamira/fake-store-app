@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.pay.productsapp.core.network.responses.NetworkResponse
 import com.pay.productsapp.core.network.retrofit.ApiClient
-import com.pay.productsapp.features.users.data.data_source.local.database.AppDatabase
+import com.pay.productsapp.core.database.AppDatabase
 import com.pay.productsapp.features.users.data.mappers.toDomain
 import com.pay.productsapp.features.users.data.mappers.toEntity
 import com.pay.productsapp.features.users.domain.models.User

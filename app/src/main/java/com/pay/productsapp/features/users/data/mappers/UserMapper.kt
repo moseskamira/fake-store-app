@@ -1,10 +1,10 @@
 package com.pay.productsapp.features.users.data.mappers
 
-import com.pay.productsapp.features.users.data.data_source.local.entity.UserEntity
+import com.pay.productsapp.features.users.data.data_source.local.entities.UserEntity
 import com.pay.productsapp.features.users.data.models.UserDto
 import com.pay.productsapp.features.users.domain.models.User
 
-// DTO → Domain
+
 fun UserDto.toDomain(): User {
     return User(
         id = id,
