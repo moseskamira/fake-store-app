@@ -1,0 +1,41 @@
+package com.pay.store.features.auth.presentation.view_models
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.pay.store.core.utils.SessionManager
+import com.pay.store.features.auth.data.models.LoginRequest
+import com.pay.store.features.auth.data.models.LoginResponse
+import com.pay.store.features.auth.domain.repositories.AuthRepository
+import kotlinx.coroutines.launch
+
+class AuthViewModel(
+    private val authRepo: AuthRepository,
+    private val sessionManager: SessionManager
+) : ViewModel() {
+    private val _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> = _isLoading
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> = _error
+    private val _loginResponse = MutableLiveData<LoginResponse?>()
+    val loginResponse: LiveData<LoginResponse?> = _loginResponse
+    fun login(request: LoginRequest) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+            val result = authRepo.login(request)
+            if (result.success) {
+                val data = result.data
+                _loginResponse.value = data
+                data?.token?.let {
+                    sessionManager.saveToken(it)
+                    sessionManager.setIsLoggedIn(true)
+                }
+            } else {
+                _error.value = result.error ?: "Login failed"
+            }
+            _isLoading.value = false
+        }
+    }
+}

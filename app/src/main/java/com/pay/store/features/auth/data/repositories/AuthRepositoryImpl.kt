@@ -1,0 +1,37 @@
+package com.pay.store.features.auth.data.repositories
+
+import com.pay.store.core.network.responses.NetworkResponse
+import com.pay.store.core.network.retrofit.ApiClient
+import com.pay.store.features.auth.data.models.LoginRequest
+import com.pay.store.features.auth.data.models.LoginResponse
+import com.pay.store.features.auth.domain.repositories.AuthRepository
+
+class AuthRepositoryImpl(private val apiClient: ApiClient) : AuthRepository {
+    override suspend fun login(request: LoginRequest): NetworkResponse<LoginResponse> {
+        try {
+            val response = apiClient.login(request)
+            if (response.isSuccessful) {
+                val data = response.body()
+                return NetworkResponse(
+                    data = data,
+                    success = true
+                )
+            } else {
+                val error = response.errorBody()?.string()
+                return NetworkResponse(
+                    error = error,
+                    success = false
+                )
+            }
+        } catch (e: Exception) {
+            val error = e.message
+            return NetworkResponse(
+                error = error,
+                success = false
+            )
+        }
+
+    }
+
+
+}
