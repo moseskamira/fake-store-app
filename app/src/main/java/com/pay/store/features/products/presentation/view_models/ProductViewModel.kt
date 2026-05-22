@@ -19,14 +19,22 @@ class ProductViewModel(private val prodRepo: ProductRepository) : ViewModel() {
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
     private val _error = MutableLiveData("")
+    private val _categoryError = MutableLiveData("")
     val error: LiveData<String> = _error
+    val categoryError:LiveData<String> = _categoryError
     private val _pInfoError = MutableLiveData("")
     val pInfoError: LiveData<String> = _pInfoError
     private val _isLoadingPInfo = MutableLiveData(false)
     val isLoadingPInfo: LiveData<Boolean> = _isLoadingPInfo
+    private val _categories = MutableLiveData<List<String>>()
+    val categories: LiveData<List<String>> = _categories
+    private  val _isLoadingCategories = MutableLiveData<Boolean>()
+    val isLoadingCategories: LiveData<Boolean> = _isLoadingCategories
+
 
     init {
         loadProducts()
+        loadCategories()
     }
 
     private fun loadProducts() {
@@ -47,6 +55,22 @@ class ProductViewModel(private val prodRepo: ProductRepository) : ViewModel() {
                 }
             }
             _isLoading.value = false
+        }
+    }
+
+    private fun loadCategories() {
+        viewModelScope.launch {
+            _isLoadingCategories.value = true
+            _categoryError.value = ""
+            val result = prodRepo.getCategories()
+            if (result.success) {
+                val data = result.data
+                _categories.value = data
+            } else {
+                val errorMsg = result.error
+                _categoryError.value = errorMsg
+            }
+            _isLoadingCategories.value = false
         }
     }
 

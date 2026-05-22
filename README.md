@@ -1,10 +1,10 @@
-# 🚀 Android LevelUp Project (MVVM + Jetpack Compose + Room DB)
+# Android LevelUp Project (MVVM + Jetpack Compose + Room DB)
 
 A modern Android application built using Jetpack Compose, MVVM Architecture, Retrofit, and Room Database, powered by the FakeStore API.
 
 ---
 
-# 📱 Overview
+# Overview
 
 Android LevelUp Project is a production-style Android application demonstrating modern Android development practices using Clean Architecture principles and reactive UI patterns.
 
@@ -28,37 +28,37 @@ The application integrates multiple FakeStore API features including:
 
 ---
 
-# ✨ Features
+# Features
 
-## 🛍 Products
+## Products
 - Fetch products from API
 - Display products in LazyColumn / LazyVerticalGrid
 - Product detail screen
 - Category filtering
 
-## 👤 Users
+## Users
 - Fetch users from API
 - Store users locally using Room Database
 - Offline-first data handling
 
-## 🔐 Authentication
+## Authentication
 - User login integration
 - Session persistence
 
-## 🛒 Cart
+## Cart
 - Fetch cart data
 - Display cart items
 
-## 💾 Offline Support
+## Offline Support
 - Room Database caching
 - Local-first architecture approach
 - Persistent local storage
 
 ---
 
-# 🧠 Architecture (MVVM)
+# Architecture (MVVM)
 
-## 📦 Layers
+## Layers
 
 ### 1. Presentation Layer (UI)
 Built using Jetpack Compose:
@@ -88,7 +88,7 @@ Handles all data operations:
 
 ---
 
-# 🔄 Application Flow
+# Application Flow
 
 UI (Compose)
 ↓
@@ -102,7 +102,7 @@ The app intelligently decides whether to use cached local data or fetch fresh re
 
 ---
 
-# 🗄 Room Database
+# Room Database
 
 The project uses Room Database for:
 - Offline caching
@@ -119,7 +119,7 @@ Implemented using:
 
 ---
 
-# 🌐 Networking
+# Networking
 
 API communication handled using:
 - Retrofit
@@ -134,7 +134,7 @@ Features include:
 
 ---
 
-# 🧩 Tech Stack
+# Tech Stack
 
 - Kotlin
 - Jetpack Compose
@@ -152,7 +152,7 @@ Features include:
 
 ---
 
-# 📡 API Used
+# API Used
 
 FakeStore API:
 
@@ -167,7 +167,7 @@ Endpoints used include:
 
 ---
 
-# 📂 Project Highlights
+# Project Highlights
 
 - Clean Architecture structure
 - DTO → Domain → Entity mapping
@@ -179,7 +179,7 @@ Endpoints used include:
 
 ---
 
-# 🚀 Future Improvements
+# Future Improvements
 
 - Pagination
 - Search functionality
@@ -191,13 +191,13 @@ Endpoints used include:
 
 ---
 
-# 🔐 Login Credentials
+# Login Credentials
 
 - Username: mor_2314
 - Password: 83r5^_
 
 ---
 
-# 📌 Summary
+# Summary
 
 This project demonstrates modern Android development using Jetpack Compose, MVVM Architecture, Retrofit, and Room Database while applying clean architecture principles, scalable project structure, reactive state management, and offline-first data handling strategies.
