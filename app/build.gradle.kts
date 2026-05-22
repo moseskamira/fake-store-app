@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.pay.productsapp"
+    namespace = "com.pay.store"
     compileSdk = 35
 
     defaultConfig {
