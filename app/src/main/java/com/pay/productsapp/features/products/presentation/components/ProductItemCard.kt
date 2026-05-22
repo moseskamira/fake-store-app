@@ -17,10 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.pay.productsapp.features.products.data.models.ProductDTO
+import com.pay.productsapp.features.products.domain.models.Product
 
 @Composable
-fun ProductItemCard(product: ProductDTO, onClick: (Int) -> Unit) {
+fun ProductItemCard(product: Product, onClick: (Int) -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()

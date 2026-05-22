@@ -1,6 +1,6 @@
-package com.pay.productsapp.features.products.data.models
+package com.pay.productsapp.features.products.domain.models
 
-data class ProductDTO(
+data class Product(
     val id: Int?,
     val title: String?,
     val description: String?,

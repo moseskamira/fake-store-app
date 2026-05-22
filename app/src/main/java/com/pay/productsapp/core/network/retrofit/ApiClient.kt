@@ -3,7 +3,7 @@ package com.pay.productsapp.core.network.retrofit
 import com.pay.productsapp.features.auth.data.models.LoginRequest
 import com.pay.productsapp.features.auth.data.models.LoginResponse
 import com.pay.productsapp.features.carts.data.models.CartDTO
-import com.pay.productsapp.features.products.data.models.ProductDTO
+import com.pay.productsapp.features.products.data.models.ProductDto
 import com.pay.productsapp.features.users.data.models.UserDto
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,10 +25,10 @@ interface ApiClient {
     suspend fun fetchProducts(
         @Query("limit") limit: String,
         @Query("sort") sort: String
-    ): Response<List<ProductDTO>>
+    ): Response<List<ProductDto>>
 
     @GET(value = Apis.PRODUCT_INFO)
-    suspend fun fetchProduct(@Path("id") prodId: String): Response<ProductDTO>
+    suspend fun fetchProduct(@Path("id") prodId: String): Response<ProductDto>
 
     @GET(Apis.CATEGORIES)
     suspend fun getCategories(): List<String>
@@ -36,7 +36,7 @@ interface ApiClient {
     @GET(Apis.CATEGORY_PRODUCTS)
     suspend fun getProductsByCategory(
         @Path("category") category: String
-    ): List<ProductDTO>
+    ): List<ProductDto>
 
 
     @GET(Apis.CARTS)

@@ -1,4 +1,4 @@
-package com.pay.productsapp.features.users.data.data_source.local.entity
+package com.pay.productsapp.features.users.data.data_source.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

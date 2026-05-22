@@ -9,10 +9,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.pay.productsapp.features.products.data.models.ProductDTO
+import com.pay.productsapp.features.products.data.models.ProductDto
+import com.pay.productsapp.features.products.domain.models.Product
 
 @Composable
-fun ProductInfoSection(product: ProductDTO) {
+fun ProductInfoSection(product: Product) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = "Description",
