@@ -8,4 +8,5 @@ interface ProductRepository {
     suspend fun getProducts(): NetworkResponse<List<Product>>
     suspend fun getDBProducts(): LiveData<List<Product>>
     suspend fun getProductInfo(prodId: Int): NetworkResponse<Product>
+    suspend fun getCategories(): NetworkResponse<List<String>>
 }

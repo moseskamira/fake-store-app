@@ -17,7 +17,8 @@ class ProductRepositoryImpl(private val apiClient: ApiClient, private val prodDa
             val response = apiClient.fetchProducts(limit = "25", sort = "desc")
             if (response.isSuccessful) {
                 val dtoList = response.body()
-                dtoList?.map { dto-> prodDao.addProduct(dto.toEntity())
+                dtoList?.map { dto ->
+                    prodDao.addProduct(dto.toEntity())
                 }
                 val domainList = dtoList?.map { dtoItem ->
                     dtoItem.toDomain()
@@ -58,5 +59,23 @@ class ProductRepositoryImpl(private val apiClient: ApiClient, private val prodDa
 
         }
 
+    }
+
+    override suspend fun getCategories(): NetworkResponse<List<String>> {
+        try {
+            val response = apiClient.getCategories()
+            if (response.isSuccessful) {
+                val responseData = response.body()
+                return NetworkResponse(data = responseData, success = true)
+            } else {
+                val error = response.errorBody()?.string()
+                return NetworkResponse(success = false, error = error)
+            }
+
+        } catch (e: Exception) {
+            val error = e.message
+            return NetworkResponse(success = false, error = error)
+
+        }
     }
 }

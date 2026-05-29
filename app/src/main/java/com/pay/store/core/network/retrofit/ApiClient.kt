@@ -31,7 +31,7 @@ interface ApiClient {
     suspend fun fetchProduct(@Path("id") prodId: String): Response<ProductDto>
 
     @GET(Apis.CATEGORIES)
-    suspend fun getCategories(): List<String>
+    suspend fun getCategories(): Response<List<String>>
 
     @GET(Apis.CATEGORY_PRODUCTS)
     suspend fun getProductsByCategory(

@@ -10,7 +10,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.pay.productsapp"
+        applicationId = "com.pay.store"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

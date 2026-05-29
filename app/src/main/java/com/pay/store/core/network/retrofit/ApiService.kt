@@ -26,10 +26,16 @@ class ApiService private constructor(context: Context) {
         .addInterceptor(TokenInterceptor(context))
         .addInterceptor(loggingInterceptor)
         .build()
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(Apis.BASE_URL)
-        .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    val apiClient: ApiClient = retrofit.create(ApiClient::class.java)
+
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(Apis.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    }
+    val apiClient: ApiClient by lazy {
+        retrofit.create(ApiClient::class.java)
+    }
 }
